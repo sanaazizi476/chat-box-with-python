@@ -1,0 +1,132 @@
+import random
+
+# دیکشنری احساسات و پاسخ‌های مربوطه
+emotion_dict = {
+    'happy': ['I\'m glad to hear that you\'re feeling good!', 'That\'s awesome! Keep smiling!'],
+    'sad': ['I\'m sorry you\'re feeling down.', 'Are you sure everything is okay? Want to talk about it?'],
+    'neutral': ['Alright, I see.', 'Okay, got it.'],
+    'questioning': ['Why do you think that is?', 'What made you feel that way?'],
+    'greeting':['hi can i hlep you?']
+}
+
+topic_dict = {
+    'sports': ['Sports are a great way to stay active and healthy. Football, basketball, and tennis are just a few examples of popular sports enjoyed worldwide.',
+               'Sports are not just about physical activity; they also teach teamwork, discipline, and resilience. Whether it\'s playing or watching, they can bring people together.'],
+    'food': ['Food is essential for life, and it can be a great way to explore different cultures. From street food to fine dining, there is so much variety!',
+             'Food brings people together and can be a source of comfort. There are endless options, from healthy meals to indulgent treats, depending on your mood.'],
+    'movies': ['Movies are a form of storytelling that can entertain, educate, or inspire. There are many genres, from action-packed thrillers to heartwarming dramas.',
+               'Films can be a great way to escape reality for a while. Whether it\'s an epic adventure or a quiet, emotional drama, movies allow us to experience different worlds.'],
+    'music': ['Music has the power to affect our emotions, whether it\'s a song that makes us feel happy or a melody that brings back memories.',
+              'From classical music to modern pop, music is an art form that has been a part of human culture for centuries. It can uplift the spirit and provide comfort during tough times.'],
+    'books': ['Books are gateways to other worlds, offering insights, entertainment, and education. Whether fiction or non-fiction, books allow us to see life from different perspectives.',
+              'Reading is a wonderful way to expand your knowledge. A good book can take you on a journey, make you think, or provide the escape you need from everyday life.'],
+    'travel': ['Travel opens up new experiences and broadens our understanding of different cultures. It allows us to see new places, try new foods, and meet new people.',
+               'Traveling is a great way to explore the world. Whether it’s a short weekend getaway or a long trip around the globe, traveling brings fresh experiences and unforgettable memories.'],
+    'technology': ['Technology has revolutionized the way we live and interact. From smartphones to artificial intelligence, technology continues to advance and shape our world.',
+                   'The rapid evolution of technology has made our lives more connected and efficient. Innovations in tech have changed how we work, communicate, and even relax.'],
+    'nature': ['Nature is incredibly diverse, with forests, oceans, and mountains offering beauty and serenity. Spending time in nature can be a great way to relax and rejuvenate.',
+               'Being in nature helps us reconnect with the world around us. Whether it\'s a hike in the mountains or a walk in the park, nature offers calm and peace.'],
+    'fashion': ['Fashion is an expression of style and personality. It changes with seasons and trends but often reflects cultural movements and personal identity.',
+                'Fashion allows people to express themselves creatively. From casual wear to haute couture, fashion is an art form that’s constantly evolving.'],
+    'art': ['Art is a way to express human creativity, and it can be found in many forms such as painting, sculpture, and photography. Art often reflects emotions, ideas, and culture.',
+            'Art has been an important part of human history. It allows us to express our thoughts, beliefs, and stories through visual means, making it a powerful tool for communication and reflection.']
+}
+
+def detect_emotion(user_input):
+    """Detect emotion from user input"""
+   # تشخیص احساس از ورودی کاربر
+    happy_keywords = ['happy', 'joy', 'good', 'awesome']
+    sad_keywords = ['sad', 'down', 'bad', 'depressed']
+    neutral_keywords = ['okay', 'alright', 'fine']
+    greeting_keywords=['hi','hello','how are you?']
+    questioning_keywords = ['why', 'how', 'what', 'because','?']
+
+ # کلمات کلیدی برای احساسات مختلف
+    if any(word in user_input.lower() for word in happy_keywords):
+        return 'happy'
+    elif any(word in user_input.lower() for word in sad_keywords):
+        return 'sad'
+    elif any(word in user_input.lower() for word in neutral_keywords):
+        return 'neutral'
+    elif any(word in user_input.lower() for word in greeting_keywords):
+        return 'greeting'
+    elif any(word in user_input.lower() for word in questioning_keywords):
+        return 'questioning'
+    else:
+        return 'questioning' # در صورتی که هیچ کلمه کلیدی پیدا نشد، پیش‌فرض به سوالی بودن تغییر می‌کند
+
+def detect_topic(user_input):
+    """Detect topic from user input"""
+    # تشخیص موضوع از ورودی کاربر
+    sports_keywords = ['sport', 'football', 'basketball', 'game', 'play']
+    food_keywords = ['food', 'eat', 'meal', 'cooking', 'recipe']
+    movies_keywords = ['movie', 'film', 'cinema', 'watch']
+    music_keywords = ['music', 'song', 'band', 'concert']
+    books_keywords = ['book', 'reading', 'novel', 'author']
+    travel_keywords = ['travel', 'trip', 'vacation', 'destination']
+    technology_keywords = ['tech', 'technology', 'gadget', 'innovation']
+    nature_keywords = ['nature', 'outdoor', 'hiking', 'forest']
+    greeting_keywords=['have good day','have good time']
+    fashion_keywords = ['fashion', 'style', 'clothes', 'outfit']
+    art_keywords = ['art', 'painting', 'drawing', 'sculpture']
+
+    # کلمات کلیدی برای موضوعات مختلف
+    if any(word in user_input.lower() for word in sports_keywords):
+        return 'sports'
+    elif any(word in user_input.lower() for word in food_keywords):
+        return 'food'
+    elif any(word in user_input.lower() for word in movies_keywords):
+        return 'movies'
+    elif any(word in user_input.lower() for word in music_keywords):
+        return 'music'
+    elif any(word in user_input.lower() for word in books_keywords):
+        return 'books'
+    elif any(word in user_input.lower() for word in travel_keywords):
+        return 'travel'
+    elif any(word in user_input.lower() for word in technology_keywords):
+        return 'technology'
+    elif any(word in user_input.lower() for word in nature_keywords):
+        return 'nature'
+    elif any(word in user_input.lower() for word in fashion_keywords):
+        return 'fashion'
+    elif any(word in user_input.lower() for word in art_keywords):
+        return 'art'
+    elif any(word in user_input.lower() for word in greeting_keywords):
+        return 'greeting'
+    else:
+        return None # هیچ موضوعی شناسایی نشده است
+
+def chat():
+    """Start the chat with the user"""
+    print("Hello! I'm here to chat. Tell me what's on your mind.")
+    current_topic = None   # نگهداری موضوع فعلی که کاربر علاقه‌مند به آن است
+    
+    while True:
+        user_input = input("You: ")
+        
+        # خروج و ورود
+        if user_input.lower() in ['goodbye', 'bye', 'exit', 'quit']:
+            print("Goodbye! Hope you have a great day!")
+            break
+        if user_input.lower() in [ 'hello', 'hi']:
+            print("hi have good time")
+            break
+        
+        # اینپوت و تابع ها
+        if current_topic is None:
+            detected_topic = detect_topic(user_input)
+            if detected_topic:
+                current_topic = detected_topic
+                print(f"Let's talk about {current_topic}!")
+                print(random.choice(topic_dict[current_topic]))  
+            else:
+                print("That's interesting! Tell me more!")
+        else:
+           
+            print(random.choice(topic_dict[current_topic])) 
+            
+# اجرا چت
+chat()
+#با هنر های دیگه ثنا در لینک گیت او اشنا شوید
+#https://github.com/sanaazizi476/chat-box-with-python.git
+# با ثنا:)NLPجواب های مشابه این چت باکس  پیشرفته تر و با  
